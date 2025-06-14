@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dental Lead Discovery Assistant</title>
+  <style>
+    body { font-family: Arial; padding: 2em; max-width: 700px; margin: auto; }
+    textarea, input, button { width: 100%; margin-top: 10px; font-size: 1em; padding: 10px; }
+    .output { margin-top: 20px; white-space: pre-wrap; background: #f4f4f4; padding: 15px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+  <h2>🦷 Dental Lead Discovery Assistant</h2>
+  <p>Paste the voicemail or receptionist message below:</p>
+  <textarea id="inputPrompt" rows="6" placeholder="Example: 'You've reached our office after hours...'"></textarea>
+  <button onclick="generateResponse()">Generate Discovery Response</button>
+
+  <div class="output" id="outputResponse"></div>
+
+  <script>
+    function generateResponse() {
+      const input = document.getElementById("inputPrompt").value.toLowerCase();
+      let response = "";
+
+      if (input.includes("after hours") || input.includes("voicemail")) {
+        response += "🧠 Pain Point: Missed After-Hours Calls\n";
+        response += "Salesperson: 'Sounds like you’re handling after-hours calls through voicemail right now. What’s the next step for the team the following morning?'\n\n";
+        response += "Follow-up: 'Roughly how much time does your team spend on callbacks, and do you ever miss out on new patients who don’t leave a message?'\n";
+      }
+
+      if (input.includes("short-staffed") || input.includes("only one receptionist")) {
+        response += "🧠 Pain Point: Staffing Pressure\n";
+        response += "Salesperson: 'With just one person covering the front desk, especially during peak times, what challenges do you see most often?'\n";
+      }
+
+      if (input.includes("cancellation") || input.includes("empty slot")) {
+        response += "🧠 Pain Point: Lost Chair Time\n";
+        response += "Salesperson: 'What’s your current process when a patient cancels, especially at the last minute? Do you have a system in place to backfill those times quickly?'\n";
+      }
+
+      if (!response) {
+        response = "⚠️ No match found for known pain points. Try including terms like 'after hours', 'cancellations', or 'staffing'.";
+      }
+
+      document.getElementById("outputResponse").innerText = response;
+    }
+  </script>
+
+</body>
+</html>
